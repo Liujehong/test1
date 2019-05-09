@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+void fowrite();
+int main(int argc, char *argv[]) {
+	
+	fowrite();
+	return 0;
+}
+//输入姓名 学号 数学 语文 英语 
+void fowrite()
+{
+	FILE *fp;
+	int flag;
+	
+	while(1)
+	{
+		char stuname[20];
+		char stuid[20];
+		char smath[20];
+		char schinese[20];
+		char sengish[20];
+		if((fp=fopen("g:/testday04.txt","a"))==NULL)
+		{
+			printf("打开失败!");
+			system("pause");
+			exit(0);
+		}
+		printf("请输入姓名：");
+		scanf("%s",stuname) ;
+		printf("请输入学号：");
+		scanf("%s",stuid) ;
+		printf("请输入数学成绩：");
+		scanf("%s",smath) ;
+		printf("请输入：语文成绩");
+		scanf("%s",schinese);
+		printf("请输入英语成绩：");
+		scanf("%s",sengish) ;
+		fprintf(fp,"%s %s %s %s %s ",stuname,stuid,smath,schinese,sengish);
+		printf("写入成功。"); 
+		printf("是否继续写入: Y(1)/N(0)");
+		scanf("%d",&flag); 
+		if(flag==0)
+		{
+			break;
+		}
+		fclose(fp);
+		
+		
+	}
+ } 
