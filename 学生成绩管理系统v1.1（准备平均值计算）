@@ -68,7 +68,7 @@ void menu()
 			case 1:foread();break;
 			case 2:foadd();break;
 			case 3:break;
-			case 4:break; 
+			case 4:deldate();break; 
 		}
 		if(flag==0)
 		{
