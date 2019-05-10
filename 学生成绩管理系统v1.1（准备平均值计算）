@@ -154,7 +154,7 @@ void foread()//读取数据
 		
 		
 		printf("是否使用计算平均分系统：是（1）/否（0）"); 
-		scanf("%d",flag);	
+		scanf("%d",&flag);	
 		if(flag==0)
 		{   break;
 			
@@ -189,5 +189,51 @@ int avg()
 {  
 printf("正在开发中") ; 
 } 
-
-  
+void deldate()
+{
+	char id[20];
+	printf("请输入要删除数据的学号：");
+	scanf("%s",&id);
+	FILE *fp1,*fp2;
+	
+	
+	
+	if((fp1=fopen("d:/score.txt","r"))==NULL)
+	{
+		printf("打开错误！");
+		system("pause");
+		exit(0); 
+	}
+	
+	char stuname[20];
+ 	char stuid[20];
+ 	char stuchinese[20];
+ 	char stumath[20];
+ 	char stuenglish[20];
+	//向fp2中写入fp1中的内容 
+	while(fscanf(fp1,"%s %s %s %s %s",stuname,stuid,stuchinese,stumath,stuenglish)!=EOF)
+	{
+		if(strcmp(id,stuid)==0)
+		{
+			continue;
+		}
+		if((fp2=fopen("d:/removscore.txt","a"))==NULL)
+		
+		{
+			printf("添加失败");
+			system("pause"); 
+			exit(0);
+		}
+		fflush(stdin);
+		fprintf(fp2,"%s %s %s %s %s\n",stuname,stuid,stuchinese,stumath,stuenglish);
+		fflush(stdin);
+		fclose(fp2); 
+	
+	}	 
+	fclose(fp1);
+	remove("d:/score.txt");
+	rename("d:/removscore.txt","d:/score.txt");
+	printf("删除成功");
+	foread(); 
+	 
+} 
