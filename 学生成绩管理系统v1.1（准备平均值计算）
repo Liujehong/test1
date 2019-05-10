@@ -143,17 +143,18 @@ void foread()//读取数据
 	 	system("pause");
 	 	exit(0);
 	}   
-	//格式化输出 
+	//格式化输出
+	printf("%-10s%-15s%-10s%-10s%-10s\n\n","姓名","学号","语文","数学","英语");  
 	while(1)
 	{
-		printf("%-10s%-15s%-10s%-10s%-10s\n\n","姓名","学号","语文","数学","英语");   
+		  
 		while(fscanf(fp,"%s %s %s %s %s\n\n",stuname,stuid,stuchinese,stumath,stuenglish)!=EOF)
 		{
 			printf("%-10s%-15s%-10s%-10s%-10s\n\n",stuname,stuid,stuchinese,stumath,stuenglish);	 
 		}
 		
-		
-		printf("是否使用计算平均分系统：是（1）/否（0）"); 
+		fclose(fp);
+		printf("是否使用删除功能：是（1）/否（0）"); 
 		scanf("%d",&flag);	
 		if(flag==0)
 		{   break;
@@ -161,12 +162,12 @@ void foread()//读取数据
 		 } 
 		else
 		{
-			avg();//是否调用平均分计算。
+			deldate();
 		}
 		
 		
 	}
-	fclose(fp);  
+  
 	
 	
  } 
@@ -228,12 +229,15 @@ void deldate()
 		fprintf(fp2,"%s %s %s %s %s\n",stuname,stuid,stuchinese,stumath,stuenglish);
 		fflush(stdin);
 		fclose(fp2); 
-	
+		
+		
 	}	 
 	fclose(fp1);
 	remove("d:/score.txt");
 	rename("d:/removscore.txt","d:/score.txt");
 	printf("删除成功");
 	foread(); 
-	 
+		 
 } 
+
+  
