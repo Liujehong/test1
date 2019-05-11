@@ -67,11 +67,11 @@ void menu()
 		{
 			case 1:foread();break;
 			case 2:foadd();break;
-			case 3:break;
+   			case 3:editdate();break;
 			case 4:deldate();break; 
 		}
 		if(flag==0)
-		{
+		{	system("cls");
 			break;
 			
 		 } 
@@ -145,8 +145,7 @@ void foread()//读取数据
 	}   
 	//格式化输出
 	printf("%-10s%-15s%-10s%-10s%-10s\n\n","姓名","学号","语文","数学","英语");  
-	while(1)
-	{
+
 		  
 		while(fscanf(fp,"%s %s %s %s %s\n\n",stuname,stuid,stuchinese,stumath,stuenglish)!=EOF)
 		{
@@ -157,8 +156,9 @@ void foread()//读取数据
 		printf("是否使用删除功能：是（1）/否（0）"); 
 		scanf("%d",&flag);	
 		if(flag==0)
-		{   break;
-			
+		{   
+			system("cls");
+			menu();	
 		 } 
 		else
 		{
@@ -170,7 +170,7 @@ void foread()//读取数据
   
 	
 	
- } 
+  
  //只有3次登陆机会
  void logtest()
  {  
@@ -188,7 +188,10 @@ void foread()//读取数据
 //计算平均数
 int avg()
 {  
-printf("正在开发中") ; 
+	int avgnum;
+	for(i)
+ 
+	printf("正在开发中") ; 
 } 
 void deldate()
 {
@@ -215,7 +218,8 @@ void deldate()
 	while(fscanf(fp1,"%s %s %s %s %s",stuname,stuid,stuchinese,stumath,stuenglish)!=EOF)
 	{
 		if(strcmp(id,stuid)==0)
-		{
+		{	
+			
 			continue;
 		}
 		if((fp2=fopen("d:/removscore.txt","a"))==NULL)
@@ -235,9 +239,73 @@ void deldate()
 	fclose(fp1);
 	remove("d:/score.txt");
 	rename("d:/removscore.txt","d:/score.txt");
-	printf("删除成功");
+	printf("删除成功\n");
 	foread(); 
 		 
 } 
-
+//修改数据
+void editdate()
+{
+	char editnum[20];
+	printf("请输入学号：");
+	scanf("%s",&editnum);
+	FILE *fp1,*fp2;
+	if((fp1=fopen("d:/score.txt","r"))==NULL)
+	{
+		printf("打开文件失败！");
+		system("pause");
+		exit(0);
+		 
+	} 
+	char stuname[20];
+ 	char stuid[20];
+ 	char stuchinese[20];
+ 	char stumath[20];
+ 	char stuenglish[20];
+ 	
+ 	while(fscanf(fp1,"%s %s %s %s %s",stuname,stuid,stuchinese,stumath,stuenglish)!=EOF)
+	{
+		if(strcmp(editnum,stuid)==0)
+		{	printf("请输入姓名:");
+			scanf("%s",stuname);
+			printf("请输入学号:");
+			scanf("%s",stuid); 
+			printf("请输入语文成绩:");
+			scanf("%s",stuchinese); 
+			printf("请输入数学成绩:");
+			scanf("%s",stumath);
+			printf("请输入英语成绩：");
+			scanf("%s",stuenglish);
+			if((fp2=fopen("d:/removscore.txt","a"))==NULL)
+			
+			{
+				printf("添加失败");
+				system("pause"); 
+				exit(0);
+			}
+			fflush(stdin);
+			fprintf(fp2,"%s %s %s %s %s\n",stuname,stuid,stuchinese,stumath,stuenglish);
+			fflush(stdin);
+			fclose(fp2);
+			continue;
+		}
+		if((fp2=fopen("d:/removscore.txt","a"))==NULL)
+			
+			{
+				printf("添加失败");
+				system("pause"); 
+				exit(0);
+			}
+			fflush(stdin);
+			fprintf(fp2,"%s %s %s %s %s\n",stuname,stuid,stuchinese,stumath,stuenglish);
+			fflush(stdin);
+			fclose(fp2);
+	} 
+	fclose(fp1);
+	remove("d:/score.txt");
+	rename("d:/removscore.txt","d:/score.txt");
+	printf("修改成功\n");
+	foread(); 
+		 
+} 
   
